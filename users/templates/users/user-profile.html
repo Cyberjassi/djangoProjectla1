@@ -1,0 +1,47 @@
+{% extends "projects/main.html" %}
+
+{% block content %}
+<img style="max-width:50px" src="{{profile.profile_image.url}}" alt="image"><br>
+{{profile.name}}<br>
+{{profile.short_intro}}<br>
+{{profile.location}}<br>
+{% if profile.social_github %}
+    {{profile.social_github}}<br>
+{% endif %}
+{% if profile.social_twitter %}
+    {{profile.social_twitter}}<br>
+{% endif %}
+{% if profile.social_linkedin %}
+    {{profile.social_linkedin}}<br>
+{% endif %}
+{% if profile.social_youtube %}
+    {{profile.social_youtube}}<br>
+{% endif %}
+{% if profile.social_website %}
+    {{profile.social_website}}<br>
+{% endif %}
+Top Skills:
+{% for skill in topSkills %}
+    {{skill}}
+{% endfor %}<br>
+Others Skills:
+{% for skill in otherSkills %}
+    {{skill}}
+{% endfor %}
+<h3>Projects:</h3><br>
+
+{% for project in profile.project_set.all %}
+<a href="{% url 'project' project.id %}">
+   {{project.title}} <br>
+   <img style= "max-width:50px" src="{{project.featured_image.url}} " alt=""><br>
+   {{project.vote_ratio}} <br>
+   {{project.vote_total}} <br>
+   {% for tag in project.tags.all %}
+        {{tag}}
+   {% endfor %}<div>
+
+   </div>
+   By- <a href="{% url 'user-profile' project.owner.id %}">{{project.owner.name}}</a><br><br>
+</a>
+{% endfor %}
+{% endblock content %}

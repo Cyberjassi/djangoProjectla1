@@ -1,0 +1,19 @@
+{% extends "projects/main.html" %}
+
+{% block content %}
+{% for profile in profiles %}
+<div><a href="{% url 'user-profile' profile.id %}">
+        <img style="max-width:50px" src="{{profile.profile_image.url}}" alt="image /">
+        <ul>
+            Name:<li>{{profile.name}}</li>
+            ShortIntro:<li>{{profile.short_intro}}</li>
+            Description:<li>{{profile.bio|slice:"150"}}</li>
+            {% for skill in profile.skill_set.all %}
+                <ul>
+                    <li>{{skill}}</li>
+                </ul>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+</a></div>
+{% endblock content %}
